@@ -408,7 +408,7 @@ Color.prototype = {
 		var alpha1 = overlayColor.alpha() ? overlayColor.alpha() : 1;
 		var alpha2 = this.alpha() ? this.alpha() : 1;
 
-		// https://www.w3.org/TR/2014/CR-compositing-1-20141125/#porterduffcompositingoperators_srcover
+		// https://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcover
 		// 9.1.4. Source Over
 		// co = αs x Cs + αb x Cb x (1 – αs)
 		// αo = αs + αb x (1 – αs)
