@@ -119,18 +119,17 @@ color.mix(Color("yellow"), 0.3)   // cyan -> rgb(77, 255, 179)
 color.green(100).grayscale().lighten(0.6)
 ```
 
-### Manipulation
-
-Implementation of Porter Duff source over compositing operator as per [WCAG Compositing and Blending](https://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcover).
-
+### Overlay
 ```js
 const transparentRed = 'rgba(255, 59, 48, 0.67)';
 const transparentBlue = 'rgba(0, 122, 255, 0.65)';
 const transparentYellow = 'rgb(255, 204, 0, 0.69)';
 
-Color('white').overlay(Color(transparentRed)).rgb().string(0); // 'rgb(255, 124, 116)'
+Color('white').overlay(Color(transparentRed)); 
+// rgb(255, 255, 255) overlayed with rgba(255, 59, 48, 0.67) -> rgb(255, 124, 116)
 
-Color('black').overlay(Color(transparentRed)).rgb().string(0); // 'rgb(171, 40, 32)'
+Color('black').overlay(Color(transparentRed));
+// rgb(0, 0, 0) overlayed with rgba(255, 59, 48, 0.67) -> rgb(171, 40, 32)
 
 Color(transparentRed).contrast(Color('white')); // 3.547137959249039
 
@@ -152,6 +151,7 @@ Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed)).
 
 Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow)).hex() // '#FFB324'
 ```
+Implementation of Porter Duff source over compositing operator as per [W3C Compositing and Blending](https://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcover).
 
 ## Propers
 The API was inspired by [color-js](https://github.com/brehaut/color-js). Manipulation functions by CSS tools like Sass, LESS, and Stylus.
