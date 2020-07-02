@@ -657,6 +657,58 @@ it('Mix: 100%', function () {
 	equal(Color('#f00').mix(Color('#00f'), 1.0).hex(), '#0000FF');
 });
 
+var transparentRed = 'rgba(255, 59, 48, 0.67)';
+var transparentBlue = 'rgba(0, 122, 255, 0.65)';
+var transparentYellow = 'rgb(255, 204, 0, 0.69)';
+
+it('Overlay: opaque-white/red-67%', function () {
+	equal(Color('white').overlay(Color(transparentRed)).rgb().string(0), 'rgb(255, 124, 116)');
+});
+
+it('Overlay: opaque-black/red-67%', function () {
+	equal(Color('black').overlay(Color(transparentRed)).rgb().string(0), 'rgb(171, 40, 32)');
+});
+
+it('Overlay: Contrast with white - red-67%  |  3.5', function () {
+	equal(Color(transparentRed).contrast(Color('white')), 3.547137959249039);
+});
+
+it('Overlay: Contrast with white - opaque-white/red-67%  |  2.5', function () {
+	equal(Color('white').overlay(Color(transparentRed)).contrast(Color('white')), 2.508157178805863);
+});
+
+it('Overlay: Contrast with white - opaque-black/red-67%  |  6.9', function () {
+	equal(Color('black').overlay(Color(transparentRed)).contrast(Color('white')), 6.893229382289893);
+});
+
+it('Overlay: opaque-black/blue-65%', function () {
+	equal(Color('black').overlay(Color(transparentBlue)).rgb().string(0), 'rgb(0, 79, 166)');
+});
+
+it('Overlay: opaque-white/blue-65%', function () {
+	equal(Color('white').overlay(Color(transparentBlue)).rgb().string(0), 'rgb(89, 169, 255)');
+});
+
+it('Overlay: Contrast with white - blue-65%  |  4.0', function () {
+	equal(Color(transparentBlue).contrast(Color('white')), 4.016975780478911);
+});
+
+it('Overlay: Contrast with white - opaque-white/blue-65%  |  2.5', function () {
+	equal(Color('white').overlay(Color(transparentBlue)).contrast(Color('white')), 2.466814448364806);
+});
+
+it('Overlay: Contrast with white - opaque-black/blue-65%  |  7.8', function () {
+	equal(Color('black').overlay(Color(transparentBlue)).contrast(Color('white')), 7.847914944366607);
+});
+
+it('Overlay: chained opaque-white/yellow/red', function () {
+	equal(Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed)).hex(), '#FF703A');
+});
+
+it('Overlay: chained opaque-white/red/yellow', function () {
+	equal(Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow)).hex(), '#FFB324');
+});
+
 it('Level', function () {
 	equal(Color('white').level(Color('black')), 'AAA');
 	equal(Color('grey').level(Color('black')), 'AA');

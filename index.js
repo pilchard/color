@@ -384,6 +384,40 @@ Color.prototype = {
 				w1 * color1.green() + w2 * color2.green(),
 				w1 * color1.blue() + w2 * color2.blue(),
 				color1.alpha() * p + color2.alpha() * (1 - p));
+	},
+
+	overlay: function (overlayColor) {
+		// alpha blending with gamma correction
+		// https://en.wikipedia.org/wiki/Alpha_compositing#Composing_alpha_blending_with_gamma_correction
+
+		if (typeof overlayColor === 'string') {
+			try {
+				overlayColor = Color(overlayColor);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+
+		if (!overlayColor || !overlayColor.rgb) {
+			throw new Error('Overlay expected an instance of Color, but received an instance of ' + typeof overlayColor);
+		}
+
+		var color1 = overlayColor.rgb();
+		var color2 = this.rgb();
+
+		var alpha1 = overlayColor.alpha() ? overlayColor.alpha() : 1;
+		var alpha2 = this.alpha() ? this.alpha() : 1;
+
+		// https://www.w3.org/TR/2014/CR-compositing-1-20141125/#generalformula
+		// 9.1.4. Source Over
+		// co = αs x Cs + αb x Cb x (1 – αs)
+		// αo = αs + αb x (1 – αs)
+
+		return Color.rgb(
+			alpha1 * color1.red() + alpha2 * color2.red() * (1 - alpha1),
+			alpha1 * color1.green() + alpha2 * color2.green() * (1 - alpha1),
+			alpha1 * color1.blue() + alpha2 * color2.blue() * (1 - alpha1),
+			alpha1 + alpha2 * (1 - alpha1));
 	}
 };
 
