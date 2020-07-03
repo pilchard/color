@@ -658,7 +658,6 @@ it('Mix: 100%', function () {
 });
 
 var transparentRed = 'rgba(255, 59, 48, 0.67)';
-var transparentBlue = 'rgba(0, 122, 255, 0.65)';
 var transparentYellow = 'rgb(255, 204, 0, 0.69)';
 
 it('Overlay: opaque-white/red-67%', function () {
@@ -667,6 +666,10 @@ it('Overlay: opaque-white/red-67%', function () {
 
 it('Overlay: opaque-black/red-67%', function () {
 	equal(Color('black').overlay(Color(transparentRed)).rgb().string(0), 'rgb(171, 40, 32)');
+});
+
+it('Overlay: red/yellow', function () {
+	equal(Color(transparentRed).overlay(Color(transparentYellow)).rgb().string(0), 'rgba(229, 153, 10, 0.8976999999999999)');
 });
 
 it('Overlay: Contrast with white - red-67%  |  3.5', function () {
@@ -679,26 +682,6 @@ it('Overlay: Contrast with white - opaque-white/red-67%  |  2.5', function () {
 
 it('Overlay: Contrast with white - opaque-black/red-67%  |  6.9', function () {
 	equal(Color('black').overlay(Color(transparentRed)).contrast(Color('white')), 6.893229382289893);
-});
-
-it('Overlay: opaque-black/blue-65%', function () {
-	equal(Color('black').overlay(Color(transparentBlue)).rgb().string(0), 'rgb(0, 79, 166)');
-});
-
-it('Overlay: opaque-white/blue-65%', function () {
-	equal(Color('white').overlay(Color(transparentBlue)).rgb().string(0), 'rgb(89, 169, 255)');
-});
-
-it('Overlay: Contrast with white - blue-65%  |  4.0', function () {
-	equal(Color(transparentBlue).contrast(Color('white')), 4.016975780478911);
-});
-
-it('Overlay: Contrast with white - opaque-white/blue-65%  |  2.5', function () {
-	equal(Color('white').overlay(Color(transparentBlue)).contrast(Color('white')), 2.466814448364806);
-});
-
-it('Overlay: Contrast with white - opaque-black/blue-65%  |  7.8', function () {
-	equal(Color('black').overlay(Color(transparentBlue)).contrast(Color('white')), 7.847914944366607);
 });
 
 it('Overlay: chained opaque-white/yellow/red', function () {
