@@ -390,14 +390,6 @@ Color.prototype = {
 		// alpha blending with gamma correction
 		// https://en.wikipedia.org/wiki/Alpha_compositing#Composing_alpha_blending_with_gamma_correction
 
-		if (typeof overlayColor === 'string') {
-			try {
-				overlayColor = Color(overlayColor);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-
 		if (!overlayColor || !overlayColor.rgb) {
 			throw new Error('Overlay expected an instance of Color, but received an instance of ' + typeof overlayColor);
 		}
