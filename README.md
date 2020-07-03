@@ -124,7 +124,6 @@ color.green(100).grayscale().lighten(0.6)
 Color(backgroundColor).overlay(Color(foregroundColor));
 ```
 Implementation of Porter Duff source over compositing operator as per [W3C Compositing and Blending](https://www.w3.org/TR/compositing-1/#porterduffcompositingoperators_srcover).
-!(overlay illustration)[media/overlay.png]
 ```js
 const transparentRed = 'rgba(255, 59, 48, 0.67)';
 const transparentYellow = 'rgb(255, 204, 0, 0.69)';
@@ -137,17 +136,26 @@ Color('black').overlay(Color(transparentRed));
 ```
 Overlay returns a composite color that is an average of the background and foreground color weighted by the alpha values of each. 
 ```js
+Color(transparentRed).overlay(Color(transparentYellow));
+// Transparent red overlayed with transparent yellow -> rgba(229, 153, 10, 0.8)
+```
+Two transparent colors can be overlayed on each other and the resulting composite will also be transparent.
+```js
+Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed)).hex(); 
+// White background overlayed with yellow overlayed with red -> #FF703A
+
+Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow)).hex() 
+// White background overlayed with red overlayed with yellow -> #FFB324
+```
+Overlay is chainable and is sensitive to order.
+```js
 Color(transparentRed).contrast(Color('white')); // 3.5
 Color('white').overlay(Color(transparentRed)).contrast(Color('white')); // 2.5
 Color('black').overlay(Color(transparentRed)).contrast(Color('white')); // 6.9
 ```
-Contrast results involving transparent colors are dependant on the background color. 
-```js
-Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed)).hex(); // '#FF703A'
+Contrast calculations involving transparent colors don't account for alpha. More accurate contrast results can be acheived by first overlaying the transparent color on it's background color. 
 
-Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow)).hex() // '#FFB324'
-```
-Overlay is chainable and sensitive to the order 
+![Overlay illustration](media/overlay.png)
 
 ## Propers
 The API was inspired by [color-js](https://github.com/brehaut/color-js). Manipulation functions by CSS tools like Sass, LESS, and Stylus.
