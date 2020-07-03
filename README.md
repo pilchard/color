@@ -137,25 +137,26 @@ Color('black').overlay(Color(transparentRed));
 Overlay returns a composite color that is an average of the background and foreground color weighted by the alpha values of each. 
 ```js
 Color(transparentRed).overlay(Color(transparentYellow));
-// Transparent red overlayed with transparent yellow -> rgba(229, 153, 10, 0.8)
+// Transparent red overlayed with transparent yellow -> rgba(229, 153, 10, 0.9)
 ```
 Two transparent colors can be overlayed on each other and the resulting composite will also be transparent.
 ```js
-Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed)).hex(); 
+Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed));
 // White background overlayed with yellow overlayed with red -> #FF703A
 
-Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow)).hex() 
+Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow));
 // White background overlayed with red overlayed with yellow -> #FFB324
 ```
 Overlay is chainable and is sensitive to order.
-```js
-Color(transparentRed).contrast(Color('white')); // 3.5
-Color('white').overlay(Color(transparentRed)).contrast(Color('white')); // 2.5
-Color('black').overlay(Color(transparentRed)).contrast(Color('white')); // 6.9
-```
-Contrast calculations involving transparent colors don't account for alpha. More accurate contrast results can be acheived by first overlaying the transparent color on it's background color. 
 
 ![Overlay illustration](media/overlay.png)
+
+```js
+Color(transparentRed).contrast(Color('white')); // Contrast: 3.5, Luminance: 0.25
+Color('white').overlay(Color(transparentRed)).contrast(Color('white')); // 2.5, Luminance: 0.37
+Color('black').overlay(Color(transparentRed)).contrast(Color('white')); // 6.9, Luminance: 0.1
+```
+Contrast and luminance calculations don't account for alpha. To achieve more accurate contrast results transparent colors should first be overlayed on their intended background color. 
 
 ## Propers
 The API was inspired by [color-js](https://github.com/brehaut/color-js). Manipulation functions by CSS tools like Sass, LESS, and Stylus.
