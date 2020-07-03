@@ -148,15 +148,14 @@ Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow));
 // White background overlayed with red overlayed with yellow -> #FFB324
 ```
 Overlay is chainable and is sensitive to order.
-
-![Overlay illustration](media/overlay.png)
-
 ```js
-Color(transparentRed).contrast(Color('white')); // Contrast: 3.5, Luminance: 0.25
-Color('white').overlay(Color(transparentRed)).contrast(Color('white')); // 2.5, Luminance: 0.37
-Color('black').overlay(Color(transparentRed)).contrast(Color('white')); // 6.9, Luminance: 0.1
+Color(transparentRed).contrast(Color('white')); // 3.5
+Color('white').overlay(Color(transparentRed)).contrast(Color('white')); // 2.5
+Color('black').overlay(Color(transparentRed)).contrast(Color('white')); // 6.9
 ```
 Contrast and luminance calculations don't account for alpha. To achieve more accurate contrast results transparent colors should first be overlayed on their intended background color. 
+
+![Overlay illustration](media/overlay.png)
 
 ## Propers
 The API was inspired by [color-js](https://github.com/brehaut/color-js). Manipulation functions by CSS tools like Sass, LESS, and Stylus.
