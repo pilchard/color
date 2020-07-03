@@ -672,24 +672,24 @@ it('Overlay: red/yellow', function () {
 	equal(Color(transparentRed).overlay(Color(transparentYellow)).rgb().string(0), 'rgba(229, 153, 10, 0.8976999999999999)');
 });
 
-it('Overlay: Contrast with white - red-67%  |  3.5', function () {
-	equal(Color(transparentRed).contrast(Color('white')), 3.547137959249039);
-});
-
-it('Overlay: Contrast with white - opaque-white/red-67%  |  2.5', function () {
-	equal(Color('white').overlay(Color(transparentRed)).contrast(Color('white')), 2.508157178805863);
-});
-
-it('Overlay: Contrast with white - opaque-black/red-67%  |  6.9', function () {
-	equal(Color('black').overlay(Color(transparentRed)).contrast(Color('white')), 6.893229382289893);
-});
-
 it('Overlay: chained opaque-white/yellow/red', function () {
 	equal(Color('white').overlay(Color(transparentYellow)).overlay(Color(transparentRed)).hex(), '#FF703A');
 });
 
 it('Overlay: chained opaque-white/red/yellow', function () {
 	equal(Color('white').overlay(Color(transparentRed)).overlay(Color(transparentYellow)).hex(), '#FFB324');
+});
+
+it('Overlay: Contrast with white - red-67%', function () {
+	equal(Color(transparentRed).contrast(Color('white')), 3.547137959249039);
+});
+
+it('Overlay: Contrast with white - opaque-white/red-67%', function () {
+	equal(Color('white').overlay(Color(transparentRed)).contrast(Color('white')), 2.508157178805863);
+});
+
+it('Overlay: Contrast with white - opaque-black/red-67%', function () {
+	equal(Color('black').overlay(Color(transparentRed)).contrast(Color('white')), 6.893229382289893);
 });
 
 it('Level', function () {
